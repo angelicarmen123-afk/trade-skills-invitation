@@ -1,0 +1,778 @@
+
+<!DOCTYPE html>
+<html lang="en-IE" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="Try a trade before you commit. Explore beginner-friendly carpentry, plumbing and electrical tasters in Ireland.">
+
+  <title>Try a Trade | Irish Trade & Vocational Taster Academy</title>
+
+  <style>
+    :root {
+      --bg: #101714;
+      --card: #18221d;
+      --text: #f4f5ef;
+      --muted: #b6c2b9;
+      --accent: #d9ff69;
+      --border: #34443a;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f7f1;
+      --card: #ffffff;
+      --text: #17221b;
+      --muted: #536258;
+      --accent: #315a22;
+      --border: #d6dfd5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 0;
+    }
+
+    .logo {
+      font-weight: 900;
+      font-size: 1.3rem;
+      text-decoration: none;
+    }
+
+    .logo span,
+    .eyebrow {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .theme-button,
+    .button {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      text-decoration: none;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #17200d;
+      border-color: var(--accent);
+      font-weight: bold;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 40px;
+      align-items: center;
+      padding: 75px 0;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: -3px;
+      margin: 20px 0;
+    }
+
+    h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    .hero-art {
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--card);
+      text-align: center;
+    }
+
+    .hero-art .tools {
+      font-size: 5rem;
+    }
+
+    section {
+      padding: 55px 0;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .section-heading p,
+    .trade-card p,
+    .step p,
+    .faq p {
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .trade-card {
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trade-icon {
+      font-size: 2.8rem;
+    }
+
+    .trade-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .trade-card .button {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .step {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+    }
+
+    .step strong {
+      color: var(--accent);
+    }
+
+    .quiz-box,
+    .cta {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: var(--card);
+    }
+
+    .question {
+      display: none;
+    }
+
+    .question.active {
+      display: block;
+    }
+
+    .option {
+      display: block;
+      margin: 12px 0;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .option input {
+      margin-right: 10px;
+    }
+
+    .quiz-controls {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    #quizResult {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid var(--accent);
+      border-radius: 14px;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .faq details {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      padding: 35px 0;
+      color: var(--muted);
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 45px 0;
+      }
+
+      .cards,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="container">
+    <a class="logo" href="#top">TRY<span>A</span>TRADE.</a>
+
+    <nav aria-label="Main navigation">
+      <a href="#tasters">The tasters</a>
+      <a href="#how">How it works</a>
+      <a href="#finder">Trade finder</a>
+      <a href="#interest">Pilot updates</a>
+
+      <button class="theme-button" id="themeToggle">
+        Light mode
+      </button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="container hero">
+      <div>
+        <div class="eyebrow">
+          Irish Trade & Vocational Taster Academy
+        </div>
+
+        <h1>Try a trade <em>before</em> you commit.</h1>
+
+        <p class="lead">
+          Three trades. 90 minutes each. A real taste of what
+          you could do next. Try a practical challenge, discover
+          what you enjoy, and explore your next step.
+        </p>
+
+        <p>
+          No previous experience needed. Just curiosity and
+          a willingness to try something new.
+        </p>
+
+        <p>
+          <a class="button primary" href="#finder">
+            Find your taster
+          </a>
+
+          <a class="button" href="#tasters">
+            Explore the trades
+          </a>
+        </p>
+      </div>
+
+      <div class="hero-art">
+        <div class="tools">🛠️</div>
+        <h2>Less wondering. More trying.</h2>
+        <p>Hands-on tasters for curious beginners.</p>
+        <strong>⏱ 90 minutes</strong>
+      </div>
+    </div>
+
+    <section class="container" id="tasters">
+      <div class="section-heading">
+        <div class="eyebrow">Choose your experience</div>
+        <h2>One academy. Three ways to discover your future.</h2>
+        <p>
+          Start with the trade that catches your interest.
+          You do not need to have your future figured out yet.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="trade-card">
+          <div class="trade-icon">🪚</div>
+          <div class="eyebrow">Build it</div>
+          <h3>Carpentry & Joinery</h3>
+          <p>
+            Discover measuring, marking and woodworking.
+            Take on a beginner-friendly timber project with
+            instructor guidance.
+          </p>
+          <p><strong>90-minute practical taster</strong></p>
+          <a class="button primary" href="#interest"
+             data-trade="BUILD IT — Carpentry & Joinery">
+            Choose BUILD IT
+          </a>
+        </article>
+
+        <article class="trade-card">
+          <div class="trade-icon">🔧</div>
+          <div class="eyebrow">Make it flow</div>
+          <h3>Plumbing & Efficient Heating</h3>
+          <p>
+            Explore pipes, fittings and water systems.
+            Discover the basics of efficient heating through
+            a supervised training demonstration.
+          </p>
+          <p><strong>90-minute practical taster</strong></p>
+          <a class="button primary" href="#interest"
+             data-trade="MAKE IT FLOW — Plumbing & Efficient Heating">
+            Choose MAKE IT FLOW
+          </a>
+        </article>
+
+        <article class="trade-card">
+          <div class="trade-icon">⚡</div>
+          <div class="eyebrow">Power it</div>
+          <h3>Electrical & Renewable Energy</h3>
+          <p>
+            Explore circuit concepts, technical problem-solving
+            and renewable energy using approved low-voltage
+            training equipment.
+          </p>
+          <p><strong>90-minute practical taster</strong></p>
+          <a class="button primary" href="#interest"
+             data-trade="POWER IT — Electrical & Renewable Energy">
+            Choose POWER IT
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container" id="how">
+      <div class="section-heading">
+        <div class="eyebrow">Your experience</div>
+        <h2>What happens in 90 minutes?</h2>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <strong>01 — Discover</strong>
+          <h3>Meet the trade</h3>
+          <p>Get introduced to the tools, materials and skills.</p>
+        </div>
+
+        <div class="step">
+          <strong>02 — Learn</strong>
+          <h3>See how it works</h3>
+          <p>Watch a demonstration and learn the basics.</p>
+        </div>
+
+        <div class="step">
+          <strong>03 — Try</strong>
+          <h3>Take the challenge</h3>
+          <p>Complete a supervised beginner activity.</p>
+        </div>
+
+        <div class="step">
+          <strong>04 — Plan</strong>
+          <h3>Explore next steps</h3>
+          <p>Ask questions and find relevant training information.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="finder">
+      <div class="section-heading">
+        <div class="eyebrow">Find your fit</div>
+        <h2>Which taster could suit you?</h2>
+        <p>Answer three quick questions to get a starting suggestion.</p>
+      </div>
+
+      <div class="quiz-box">
+        <form id="tradeQuiz">
+          <div class="question active">
+            <h3>1. What sounds most interesting?</h3>
+
+            <label class="option">
+              <input type="radio" name="interest" value="build" required>
+              Making things and working with wood
+            </label>
+
+            <label class="option">
+              <input type="radio" name="interest" value="flow">
+              Understanding pipes, water and heating
+            </label>
+
+            <label class="option">
+              <input type="radio" name="interest" value="power">
+              Exploring electricity and energy technology
+            </label>
+
+            <label class="option">
+              <input type="radio" name="interest" value="unsure">
+              I'm not sure yet
+            </label>
+          </div>
+
+          <div class="question">
+            <h3>2. How do you prefer to learn?</h3>
+
+            <label class="option">
+              <input type="radio" name="learning" value="hands" required>
+              By trying something practical
+            </label>
+
+            <label class="option">
+              <input type="radio" name="learning" value="systems">
+              By understanding how things work
+            </label>
+
+            <label class="option">
+              <input type="radio" name="learning" value="explore">
+              By exploring different possibilities
+            </label>
+          </div>
+
+          <div class="question">
+            <h3>3. What would you like to do next?</h3>
+
+            <label class="option">
+              <input type="radio" name="next" value="try" required>
+              Try a taster session
+            </label>
+
+            <label class="option">
+              <input type="radio" name="next" value="compare">
+              Compare all three trades
+            </label>
+
+            <label class="option">
+              <input type="radio" name="next" value="training">
+              Explore training and career routes
+            </label>
+          </div>
+
+          <div class="quiz-controls">
+            <button class="button" id="previous" type="button" disabled>
+              Back
+            </button>
+
+            <button class="button primary" id="next" type="button">
+              Next question
+            </button>
+          </div>
+        </form>
+
+        <div id="quizResult" aria-live="polite">
+          <h3 id="resultTitle"></h3>
+          <p id="resultText"></p>
+          <a class="button primary" href="#interest">View pilot updates</a>
+          <button class="button" id="restart" type="button">
+            Retake quiz
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="interest">
+      <div class="cta">
+        <div class="eyebrow">Help shape the pilot</div>
+        <h2>Stop wondering. Start trying.</h2>
+
+        <p>
+          Choose a trade and prepare an interest message so you can
+          follow up when pilot dates and booking details are confirmed.
+        </p>
+
+        <p class="price">
+          €39
+        </p>
+
+        <p class="note">
+          Proposed pilot price per 90-minute session. This is not
+          a confirmed ticket price. Dates and venues are to be confirmed.
+        </p>
+
+        <p>
+          <label for="preferredTrade">Your preferred taster:</label>
+          <br>
+
+          <select id="preferredTrade">
+            <option value="Any taster">I'm still deciding</option>
+            <option value="BUILD IT — Carpentry & Joinery">BUILD IT</option>
+            <option value="MAKE IT FLOW — Plumbing & Efficient Heating">
+              MAKE IT FLOW
+            </option>
+            <option value="POWER IT — Electrical & Renewable Energy">
+              POWER IT
+            </option>
+          </select>
+        </p>
+
+        <button class="button primary" id="interestButton" type="button">
+          Prepare interest message
+        </button>
+
+        <p class="note" id="interestMessage" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="section-heading">
+        <div class="eyebrow">Good to know</div>
+        <h2>Frequently asked questions</h2>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Do I need previous experience?</summary>
+          <p>
+            No. The tasters are designed as beginner-friendly
+            introductions. Follow the instructor's guidance and
+            all safety instructions.
+          </p>
+        </details>
+
+        <details>
+          <summary>Will I become a qualified tradesperson?</summary>
+          <p>
+            No. A 90-minute taster is an introduction, not a
+            professional qualification or a substitute for formal
+            training or an apprenticeship.
+          </p>
+        </details>
+
+        <details>
+          <summary>When are the sessions happening?</summary>
+          <p>
+            Dates and venues have not yet been confirmed.
+            Booking is not currently available.
+          </p>
+        </details>
+
+        <details>
+          <summary>Are the activities supervised?</summary>
+          <p>
+            Activities must be delivered by suitably competent
+            instructors using appropriate equipment, supervision
+            and safety controls.
+          </p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <a class="logo" href="#top">TRY<span>A</span>TRADE.</a>
+    <p>Try it. Discover your fit. Plan your next step.</p>
+    <p class="note">
+      Pilot-concept website. Registration, booking, payment and
+      email updates are not connected.
+    </p>
+  </footer>
+
+  <script>
+    // Dark and light theme toggle
+    const themeToggle = document.getElementById("themeToggle");
+
+    themeToggle.addEventListener("click", () => {
+      const html = document.documentElement;
+      const light = html.dataset.theme !== "light";
+
+      html.dataset.theme = light ? "light" : "dark";
+      themeToggle.textContent = light ? "Dark mode" : "Light mode";
+    });
+
+    // Select a trade from the trade cards
+    document.querySelectorAll("[data-trade]").forEach(link => {
+      link.addEventListener("click", () => {
+        document.getElementById("preferredTrade").value =
+          link.dataset.trade;
+      });
+    });
+
+    // Interactive trade finder
+    const form = document.getElementById("tradeQuiz");
+    const questions = [...document.querySelectorAll(".question")];
+    const next = document.getElementById("next");
+    const previous = document.getElementById("previous");
+    const result = document.getElementById("quizResult");
+    let current = 0;
+
+    function updateQuiz() {
+      questions.forEach((question, index) => {
+        question.classList.toggle("active", index === current);
+      });
+
+      previous.disabled = current === 0;
+      next.textContent =
+        current === questions.length - 1
+          ? "Show my suggestion"
+          : "Next question";
+
+      next.disabled = !questions[current].querySelector(
+        'input[type="radio"]:checked'
+      );
+    }
+
+    form.addEventListener("change", updateQuiz);
+
+    next.addEventListener("click", () => {
+      if (!questions[current].querySelector(
+        'input[type="radio"]:checked'
+      )) return;
+
+      if (current < questions.length - 1) {
+        current++;
+        updateQuiz();
+        return;
+      }
+
+      const interest = form.elements.interest.value;
+      const learning = form.elements.learning.value;
+      const nextStep = form.elements.next.value;
+
+      const trades = {
+        build: ["BUILD IT — Carpentry & Joinery",
+          "Explore measuring, woodworking and practical construction."],
+        flow: ["MAKE IT FLOW — Plumbing & Efficient Heating",
+          "Explore pipes, fittings, water systems and efficient heating."],
+        power: ["POWER IT — Electrical & Renewable Energy",
+          "Explore circuit concepts and renewable energy using approved training equipment."],
+        unsure: ["Explore all three tasters",
+          "Compare the three activities and choose the one that interests you most."]
+      };
+
+      let tier = "Focus";
+      if (interest === "unsure" || learning === "explore" ||
+          nextStep === "compare") {
+        tier = "Explore";
+      } else if (nextStep === "training") {
+        tier = "Ready";
+      }
+
+      document.getElementById("resultTitle").textContent =
+        tier + " tier: " + trades[interest][0];
+
+      document.getElementById("resultText").textContent =
+        trades[interest][1] +
+        " This is an interest-based suggestion, not a formal career assessment.";
+
+      form.style.display = "none";
+      result.style.display = "block";
+    });
+
+    previous.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        updateQuiz();
+      }
+    });
+
+    document.getElementById("restart").addEventListener("click", () => {
+      form.reset();
+      current = 0;
+      form.style.display = "block";
+      result.style.display = "none";
+      updateQuiz();
+    });
+
+    // Prepare a message; this does not submit a registration
+    document.getElementById("interestButton").addEventListener("click", async () => {
+      const trade = document.getElementById("preferredTrade").value;
+
+      const message =
+        "I'm interested in the Try a Trade pilot. My preferred taster is: " +
+        trade +
+        ". Please share confirmed dates and booking details when available.";
+
+      const output = document.getElementById("interestMessage");
+
+      try {
+        await navigator.clipboard.writeText(message);
+        output.textContent =
+          "Interest message copied. Paste it into an email or message to contact the academy.";
+      } catch (error) {
+        output.textContent = message +
+          " (Copy this message manually.)";
+      }
+    });
+
+    updateQuiz();
+  </script>
+</body>
+</html>
